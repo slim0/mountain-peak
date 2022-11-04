@@ -29,16 +29,15 @@ RUN apt-get install netcat -y
 RUN pip install --upgrade pip
 
 # install poetry - respects $POETRY_VERSION & $POETRY_HOME
-# RUN curl -sSL https://install.python-poetry.org | python
+RUN curl -sSL https://install.python-poetry.org | python
 
 WORKDIR /code
-COPY requirements.txt /code/
-RUN pip install -r requirements.txt
 COPY . /code/
+RUN poetry export -f requirements.txt --output requirements.txt
+RUN pip install -r /code/requirements.txt
 
 # copy entrypoint.sh
 COPY ./docker-entrypoint.sh .
-# RUN sed -i 's/\r$//g' /code/docker-entrypoint.sh
 RUN chmod +x /code/docker-entrypoint.sh
 
 ENTRYPOINT ["/bin/sh", "/code/docker-entrypoint.sh"]
