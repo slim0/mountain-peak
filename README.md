@@ -2,9 +2,23 @@
 
 MFI recrutment process. Simple web service for storing and retrieving moutain peaks.
 
+# Instructions
+
+The context of this test is to provide a simple web service for storing and retrieving moutain peaks.
+
+Using Django / FastAPI / Laravel / Symfony … *  and a postgresql database (postGIS can be used for geo features), implement the following features:
+- models/db tables for storing a peak location and attribute: lat, lon, altitude, name
+- REST api endpoints to :
+  * create/read/update/delete a peak
+  * retrieve a list of peaks in a given geographical bounding box<>
+
+Deploy all this stack using docker and docker-compose
+
+The source code should be delivered using github/ bitbucket with detailed explanations on how to deploy and launch the project.
+
 # Commands
 
-`docker compose up` : build (if needed) and run app
+`docker compose up` : build (if not built yet) and run app
 
 `docker compose build` : if Dockerfile changed, then you may need to rebuild the image
 
@@ -25,6 +39,11 @@ MFI recrutment process. Simple web service for storing and retrieving moutain pe
 1. git clone the project `https://github.com/slim0/mountain-peak.git`
 2. install docker-compose on your workstation
 3. run `docker compose up` from the root folder of the git project. *`-d` option can be add if you want to start the containers as a deamon process.*
+
+# Setup dev environment
+1. Follow instructions from "How to run the app" section
+2. run `poetry install`
+3. run `poetry shell` on a terminal
 
 # Add python package / requirements
 
