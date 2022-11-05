@@ -2,7 +2,7 @@ from django.contrib.gis.geos import Polygon
 from rest_framework import generics, viewsets
 
 from .models import MountainPeak
-from .serializers import MountainPeakSerializer
+from .serializers import BboxPolygonSerializer, MountainPeakSerializer
 
 
 # Create your views here.
@@ -23,8 +23,13 @@ class MountainPeaksInBbox(generics.ListAPIView):
     serializer_class = MountainPeakSerializer
 
     def get_queryset(self):
-        request = self.request
-        bbox = Polygon.from_bbox(
-            (request.query_params["long1"], request.query_params["lat1"], request.query_params["long2"], request.query_params["lat2"])
+        query_params = self.request.GET
+        bbox_polygon_serializer = BboxPolygonSerializer(
+            data={
+                "top_left": {"longitude": query_params.get("xmin", None), "latitude": query_params.get("ymin", None)},
+                "bottom_right": {"longitude": query_params.get("xmax", None), "latitude": query_params.get("ymax", None)},
+            }
         )
-        return MountainPeak.objects.filter(location__coordinates__intersects=bbox)
+        bbox_polygon_serializer.is_valid(raise_exception=True)
+        bbox_polygon = bbox_polygon_serializer.validated_data
+        return MountainPeak.objects.filter(location__coordinates__intersects=bbox_polygon)
