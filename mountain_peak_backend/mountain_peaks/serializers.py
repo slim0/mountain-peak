@@ -20,9 +20,6 @@ class MountainPeakSerializer(serializers.ModelSerializer):
         model = MountainPeak
         fields = ["id", "name", "altitude", "location"]
 
-    def get_location(self, obj):
-        return str(obj.location.coordinates)  # Or however you want to format it
-
     def create(self, validated_data):
         location_data = validated_data.pop("location")
         peak_location = Location.objects.create(coordinates=location_data["coordinates"])
@@ -30,6 +27,15 @@ class MountainPeakSerializer(serializers.ModelSerializer):
         # for track_data in tracks_data:
         #     Track.objects.create(album=album, **trxack_data)
         return mountain_peak
+
+    def update(self, instance, validated_data):
+        location = validated_data.pop("location", None)
+        # location_data = validated_data.pop("location")
+        # peak_location = Location.objects.create(coordinates=location_data["coordinates"])
+        # mountain_peak = MountainPeak.objects.create(**validated_data, location=peak_location)
+        # for track_data in tracks_data:
+        #     Track.objects.create(album=album, **trxack_data)
+        return super().update(instance=instance, validated_data=validated_data)
 
 
 class BboxPolygonSerializer(serializers.Serializer):
