@@ -17,6 +17,7 @@ Markdown = "^3.4.1"
 psycopg2-binary = "^2.9.5"
 ipython = "^8.6.0"
 python-dotenv = "^0.21.0"
+drf-extra-fields = "^3.4.1"
 
 
 [tool.poetry.group.dev.dependencies]

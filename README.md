@@ -10,7 +10,7 @@ Using Django / FastAPI / Laravel / Symfony … *  and a postgresql database (pos
 - models/db tables for storing a peak location and attribute: lat, lon, altitude, name
 - REST api endpoints to :
   * create/read/update/delete a peak
-  * retrieve a list of peaks in a given geographical bounding box<>
+  * retrieve a list of peaks in a given geographical bounding box
 
 Deploy all this stack using docker and docker-compose
 
