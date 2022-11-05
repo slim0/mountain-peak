@@ -4,21 +4,17 @@ services:
   db:
     image: postgis/postgis:14-3.3-alpine
     env_file:
-      - mountain_peak_backend/env/postgis.dev.env
+      - env/postgis.dev.env
     ports:
-      - "5432:5432"
-    volumes:
-      - ./data/db:/var/lib/postgresql/data
+      - "5432:5432" # To access database on localhost if needed (pgadmin...)
   web:
     build: .
     command: "python manage.py runserver 0.0.0.0:8000"
     env_file:
-      - mountain_peak_backend/env/postgis.dev.env
-      - mountain_peak_backend/env/django.dev.env
-    environment:
-      - AM_I_IN_A_DOCKER_CONTAINER=TRUE
+      - env/postgis.dev.env
+      - env/django.dev.env
     volumes:
-      - ./mountain_peak_backend:/code/mountain_peak_backend
+      - .:/code
     ports:
       - "8000:8000"
     depends_on:

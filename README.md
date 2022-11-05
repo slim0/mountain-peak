@@ -53,4 +53,6 @@ To add a new package: `poetry add package-name`
 
 To remove a package: `poetry remove package-name`
 
+`docker compose exec web`
+
 See [poetry documentation](https://python-poetry.org/docs/) for more about it !
