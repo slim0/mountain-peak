@@ -1,10 +1,18 @@
 from django.contrib.gis.db import models
+from django.contrib.gis.geos import Polygon
+from pydantic import validate_arguments
 
-# https://python.plainenglish.io/build-geodjango-webapp-to-store-and-query-locations-91637d485a37
+
+class LocationManager(models.Manager):
+    @validate_arguments(config=dict(arbitrary_types_allowed=True))
+    def in_bbox(self, bbox: Polygon):
+        return self.filter(coordinates__intersects=bbox)
 
 
 class Location(models.Model):
     coordinates = models.PointField(geography=True)
+
+    objects = LocationManager()
 
     def __str__(self):
         return f"Location: (lat={self.latitude}, long={self.longitude}) ({self.pk})"
@@ -18,21 +26,9 @@ class Location(models.Model):
         return self.coordinates.y
 
 
-class MountainPeakManager(models.Manager):
-    def in_bbox(self, bbox):
-        return self.filter(location__coordinates__intersects=bbox)
-
-
-# Create your models here.
-class MountainPeak(models.Model):
+class MountainPeak(Location):
     name = models.CharField(verbose_name="Mountain's peak name", max_length=255)
-    location = models.OneToOneField(
-        Location,
-        on_delete=models.CASCADE,
-    )
     altitude = models.IntegerField()
-
-    objects = MountainPeakManager()
 
     def __str__(self):
         return f"MountainPeak: {self.name} ({self.pk})"

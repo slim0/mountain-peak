@@ -2,40 +2,15 @@ from django.contrib.gis.geos import Polygon
 from drf_extra_fields.geo_fields import PointField
 from rest_framework import serializers
 
-from .models import Location, MountainPeak
-
-
-class LocationSerializer(serializers.ModelSerializer):
-    coordinates = PointField(required=True)
-
-    class Meta:
-        model = Location
-        fields = ["coordinates"]
+from .models import MountainPeak
 
 
 class MountainPeakSerializer(serializers.ModelSerializer):
-    location = LocationSerializer()
+    coordinates = PointField(required=True)
 
     class Meta:
         model = MountainPeak
-        fields = ["id", "name", "altitude", "location"]
-
-    def create(self, validated_data):
-        location_data = validated_data.pop("location")
-        peak_location = Location.objects.create(coordinates=location_data["coordinates"])
-        mountain_peak = MountainPeak.objects.create(**validated_data, location=peak_location)
-        # for track_data in tracks_data:
-        #     Track.objects.create(album=album, **trxack_data)
-        return mountain_peak
-
-    def update(self, instance, validated_data):
-        location = validated_data.pop("location", None)
-        # location_data = validated_data.pop("location")
-        # peak_location = Location.objects.create(coordinates=location_data["coordinates"])
-        # mountain_peak = MountainPeak.objects.create(**validated_data, location=peak_location)
-        # for track_data in tracks_data:
-        #     Track.objects.create(album=album, **trxack_data)
-        return super().update(instance=instance, validated_data=validated_data)
+        fields = ["id", "name", "altitude", "coordinates"]
 
 
 class BboxPolygonSerializer(serializers.Serializer):

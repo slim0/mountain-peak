@@ -13,9 +13,6 @@ class MountainPeakViewSet(viewsets.ModelViewSet):
     queryset = MountainPeak.objects.all()
     serializer_class = MountainPeakSerializer
 
-    def perform_destroy(self, instance):
-        instance.location.delete()
-
 
 class MountainPeaksInBbox(generics.ListAPIView):
     serializer_class = MountainPeakSerializer
@@ -30,4 +27,4 @@ class MountainPeaksInBbox(generics.ListAPIView):
         )
         bbox_polygon_serializer.is_valid(raise_exception=True)
         bbox_polygon = bbox_polygon_serializer.validated_data
-        return MountainPeak.objects.in_bbox(bbox=bbox_polygon)
+        return MountainPeak.objects.in_bbox(bbox=bbox_polygon)  # type: ignore
