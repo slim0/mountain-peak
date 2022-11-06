@@ -16,43 +16,43 @@ Deploy all this stack using docker and docker-compose
 
 The source code should be delivered using github/ bitbucket with detailed explanations on how to deploy and launch the project.
 
-# Commands
+# How to run the app and call the API
 
-`docker compose up` : build (if not built yet) and run app
-
-`docker compose build` : if Dockerfile changed, then you may need to rebuild the image
-
-`docker compose exec web python /code/mountain_peak_backend/manage.py makemigrations` : create new migration files if needed. To create the initial migration of a new app, you need to specify the app name at the end of this command. Also don't forget to add the app into INSTALLED_APPS django settings.
-
-`docker compose exec web python /code/mountain_peak_backend/manage.py showmigrations` : show migrations (and what migrations are applied onto the database)
-
-`docker compose exec web python /code/mountain_peak_backend/manage.py flush` : empty django development database
-
-`docker compose exec web python /code/mountain_peak_backend/manage.py migrate` : apply migrations on docker development container
-
-`docker compose exec web python /code/mountain_peak_backend/manage.py shell_plus` : Open shell_plus python interpreter
-
-`docker compose exec web python /code/mountain_peak_backend/manage.py createsuperuser` : Create a django superuser
-
-# How to run the app
-
-1. git clone the project `https://github.com/slim0/mountain-peak.git`
-2. install docker-compose on your workstation
+## Run the app
+1. Clone the git project `https://github.com/slim0/mountain-peak.git`
+2. install docker on your workstation !
 3. run `docker compose up` from the root folder of the git project. *`-d` option can be add if you want to start the containers as a deamon process.*
+
+## API calls
+
 
 # Setup dev environment
 1. Follow instructions from "How to run the app" section
-2. run `poetry install`
-3. run `poetry shell` on a terminal
+2. run `poetry install` to setup your local python environment and install all the dependencies. A `.venv` should appear at the root of the project. Be sure to configure the python environment path of your IDE to `.venv/bin/python`. If using VSCODE, there is an existing `.vscode` folder with `settings.json` file in it !
+3. Configure your IDE to use `.flake8` configuration file (linter)
+4. Configure your IDE to use `pyproject.toml` configuration file for `isort` (sort imports) and `black` (formatter)
 
-# Add python package / requirements
 
-You must use `poetry`!
+# DEV instruction, tips and ameliorations
+
+## Manage python package
+
+Use `poetry`!
 
 To add a new package: `poetry add package-name`
 
 To remove a package: `poetry remove package-name`
 
-`docker compose exec web`
+**You must rebuild the application after adding some requirements**
 
-See [poetry documentation](https://python-poetry.org/docs/) for more about it !
+See [poetry documentation](https://python-poetry.org/docs/) for more information about it !
+
+## Delete database
+Docker container database is persistent accross `./data` folder. If you nedd to erase the whole database, remove this folder and restart docker containers.
+
+# Future improvements
+- Add a production docker configuration (with nginx & uvicorn containers, production env settings)
+- CI/CD
+- Paginate MountainPeakViewSet list view if a lot of Mountains ! make a BaseView if other elements
+- change docker python image with alpine image (lighter)
+- Swagger: Manage InBBoxFilter

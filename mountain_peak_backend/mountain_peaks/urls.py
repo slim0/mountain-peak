@@ -6,7 +6,3 @@ from . import views
 router = DefaultRouter()
 router.register(r"", views.MountainPeakViewSet, basename="mountain")
 urlpatterns = router.urls
-
-urlpatterns += [
-    path("in-bbox", views.MountainPeaksInBbox.as_view()),
-]
