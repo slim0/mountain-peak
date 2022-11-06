@@ -13,7 +13,6 @@ class MountainPeakViewSet(viewsets.ModelViewSet):
 
     queryset = MountainPeak.objects.all()
     serializer_class = MountainPeakSerializer
-    # permission_classes = [IsAccountAdminOrReadOnly]
 
     def perform_destroy(self, instance):
         instance.location.delete()
@@ -28,7 +27,7 @@ class MountainPeaksInBbox(generics.ListAPIView):
             data={
                 "top_left": {"longitude": query_params.get("xmin", None), "latitude": query_params.get("ymin", None)},
                 "bottom_right": {"longitude": query_params.get("xmax", None), "latitude": query_params.get("ymax", None)},
-            }
+            }  # type: ignore
         )
         bbox_polygon_serializer.is_valid(raise_exception=True)
         bbox_polygon = bbox_polygon_serializer.validated_data
