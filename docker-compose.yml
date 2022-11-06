@@ -16,7 +16,7 @@ services:
       - env/postgis.dev.env
       - env/django.dev.env
     volumes:
-      - .:/code
+      - ./mountain_peak_backend:/app/code
     ports:
       - "8000:8000"
     depends_on:

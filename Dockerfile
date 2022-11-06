@@ -31,14 +31,21 @@ RUN pip install --upgrade pip
 # install poetry - respects $POETRY_VERSION & $POETRY_HOME
 RUN curl -sSL https://install.python-poetry.org | python
 
-WORKDIR /code
-COPY . /code/
-RUN poetry export -f requirements.txt --output requirements.txt
-RUN pip install -r /code/requirements.txt
+WORKDIR /app/code
+
+COPY ./mountain_peak_backend /app/code/
+COPY ./poetry.lock /app/
+COPY ./pyproject.toml /app/
+
+WORKDIR /app/
+
+RUN poetry export -f requirements.txt --output /app/requirements.txt
+RUN pip install -r /app/requirements.txt
 
 # copy entrypoint.sh
-COPY ./docker-entrypoint.sh .
-RUN chmod +x /code/docker-entrypoint.sh
+COPY ./docker-entrypoint.sh /app/
+RUN chmod +x /app/docker-entrypoint.sh
 
-WORKDIR /code/mountain_peak_backend
-ENTRYPOINT ["/bin/sh", "/code/docker-entrypoint.sh"]
+WORKDIR /app/code/
+
+ENTRYPOINT ["/bin/sh", "/app/docker-entrypoint.sh"]
