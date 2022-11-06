@@ -5,7 +5,14 @@ from pydantic import validate_arguments
 
 class LocationManager(models.Manager):
     @validate_arguments(config=dict(arbitrary_types_allowed=True))
-    def in_bbox(self, bbox: Polygon):
+    def in_bbox(self, bbox: Polygon) -> models.QuerySet:
+        """
+        Search location that are in the given bounding box
+        Args:
+            bbox (Polygon): Bounding box to search in
+        Returns:
+            models.QuerySet: Location in given bounding box
+        """
         return self.filter(coordinates__intersects=bbox)
 
 

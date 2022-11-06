@@ -7,7 +7,8 @@ from .serializers import BboxPolygonSerializer, MountainPeakSerializer
 # Create your views here.
 class MountainPeakViewSet(viewsets.ModelViewSet):
     """
-    A simple ViewSet for viewing and editing accounts.
+    DRF ModelViewSet : https://www.django-rest-framework.org/api-guide/viewsets/#modelviewset
+    list(), .retrieve(), .create(), .update(), .partial_update(), and .destroy() methods provided.
     """
 
     queryset = MountainPeak.objects.all()
@@ -15,6 +16,17 @@ class MountainPeakViewSet(viewsets.ModelViewSet):
 
 
 class MountainPeaksInBbox(generics.ListAPIView):
+    """
+    list() view (GET method) that retrieves all MountainPeak instance in a given bouding box.
+    Bouding box must be define with the 4 following query parameters:
+    - xmin: top-left longitude of the bounding box
+    - ymin: top-left latitude of the bounding box
+    - xmax: bottom-right longitude of the bounding box
+    - ymax: bottom-right latitude of the bounding box
+
+    URL looks like : http://localhost:8000/mountains_peaks/in-bbox?xmin=1.4&ymin=46&xmax=1.5&ymax=44
+    """
+
     serializer_class = MountainPeakSerializer
 
     def get_queryset(self):
