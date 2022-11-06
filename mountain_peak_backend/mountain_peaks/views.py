@@ -1,4 +1,3 @@
-from django.contrib.gis.geos import Polygon
 from rest_framework import generics, viewsets
 
 from .models import MountainPeak
@@ -31,4 +30,4 @@ class MountainPeaksInBbox(generics.ListAPIView):
         )
         bbox_polygon_serializer.is_valid(raise_exception=True)
         bbox_polygon = bbox_polygon_serializer.validated_data
-        return MountainPeak.objects.filter(location__coordinates__intersects=bbox_polygon)
+        return MountainPeak.objects.in_bbox(bbox=bbox_polygon)
