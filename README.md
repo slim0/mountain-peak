@@ -24,7 +24,16 @@ The source code should be delivered using github/ bitbucket with detailed explan
 3. run `docker compose up` from the root folder of the git project. *`-d` option can be add if you want to start the containers as a deamon process.*
 
 ## API calls
+Once the application is running, you can visit the swagger URL here to make calls: [http://localhost:8000/api/v1/swagger/schema/](http://localhost:8000/api/v1/swagger/schema/).
 
+N.B.:
+- GET method on /moutain_peaks/ is implementing a filter to retrieve a list of peaks in a given geographical bounding box queryparam.
+
+![mountain_peaks_bbox_filter.png](/img/mountain_peaks_bbox_filter.png)
+
+- For POST, PUT and PATCH methods, the coordinates field must be a string like: "POINT(0 0)" where the first 0 is the longitude and the second the latitude.
+
+![coordinates_field.png](/img/coordinates_field.png)
 
 # Setup dev environment
 1. Follow instructions from "How to run the app" section
@@ -55,4 +64,3 @@ Docker container database is persistent accross `./data` folder. If you nedd to 
 - CI/CD
 - Paginate MountainPeakViewSet list view if a lot of Mountains ! make a BaseView if other elements
 - change docker python image with alpine image (lighter)
-- Swagger: Manage InBBoxFilter
