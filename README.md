@@ -64,3 +64,4 @@ Docker container database is persistent accross `./data` folder. If you nedd to 
 - CI/CD
 - Paginate MountainPeakViewSet list view if a lot of Mountains ! make a BaseView if other elements
 - change docker python image with alpine image (lighter)
+- Add more tests
