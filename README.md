@@ -54,13 +54,15 @@ N.B.:
 
 ## Manage python package
 
-Use `poetry`!
+1. Use `poetry` on your local environment
 
 To add a new package: `poetry add package-name`
 
 To remove a package: `poetry remove package-name`
 
-**You must rebuild the application after adding some requirements**
+2. export to a requirements.txt file: `poetry export -f requirements.txt --output requirements.txt`
+3. run `docker compose exec web pip install -r /code/requirements.txt` or rebuild the docker container to add requirements to the python environment of the container.
+4. import the package on your .py files
 
 See [poetry documentation](https://python-poetry.org/docs/) for more information about it !
 
@@ -71,4 +73,3 @@ Docker container database is persistent accross `./data` folder. If you nedd to 
 - Add a production docker configuration (with nginx & uvicorn containers, production env settings)
 - CI/CD
 - Paginate MountainPeakViewSet list view if a lot of Mountains ! make a BaseView if other elements
-- change docker python image with alpine image (lighter)

@@ -28,24 +28,9 @@ RUN apt-get install netcat -y
 
 RUN pip install --upgrade pip
 
-# install poetry - respects $POETRY_VERSION & $POETRY_HOME
-RUN curl -sSL https://install.python-poetry.org | python
+COPY . /code/
+RUN pip install -r /code/requirements.txt
 
-WORKDIR /app/code
+WORKDIR /code/mountain_peak_backend
 
-COPY ./mountain_peak_backend /app/code/
-COPY ./poetry.lock /app/
-COPY ./pyproject.toml /app/
-
-WORKDIR /app/
-
-RUN poetry export -f requirements.txt --output /app/requirements.txt
-RUN pip install -r /app/requirements.txt
-
-# copy entrypoint.sh
-COPY ./docker-entrypoint.sh /app/
-RUN chmod +x /app/docker-entrypoint.sh
-
-WORKDIR /app/code/
-
-ENTRYPOINT ["/bin/sh", "/app/docker-entrypoint.sh"]
+ENTRYPOINT ["/bin/sh", "/code/docker-entrypoint.sh"]
