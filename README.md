@@ -46,11 +46,11 @@ N.B.:
 
 ## Run commands in docker container (all `python manage.py command` for exemple)
 
-`docker compose exec web python /app/code/manage.py my_command`
+`docker compose exec web python manage.py my_command`
 
 ## Run django tests
 
-`docker compose exec web python /app/code/manage.py test`
+`docker compose exec web python manage.py test`
 
 ## Manage python package
 
@@ -61,7 +61,7 @@ To add a new package: `poetry add package-name`
 To remove a package: `poetry remove package-name`
 
 2. export to a requirements.txt file: `poetry export -f requirements.txt --output requirements.txt`
-3. run `docker compose exec web pip install -r /code/requirements.txt` or rebuild the docker container to add requirements to the python environment of the container.
+3. run `docker compose exec web pip install -r ../requirements.txt` or rebuild the docker container to add requirements to the python environment of the container.
 4. import the package on your .py files
 
 See [poetry documentation](https://python-poetry.org/docs/) for more information about it !
