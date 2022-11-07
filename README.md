@@ -19,12 +19,10 @@ The source code should be delivered using github/ bitbucket with detailed explan
 # How to run the app and call the API
 
 ## Run the app
-1. Clone the git project `https://github.com/slim0/mountain-peak.git`
-2. install docker on your workstation !
-3. run `docker compose up` from the root folder of the git project. *`-d` option can be add if you want to start the containers as a deamon process.*
-
-## API calls
-Once the application is running, you can visit the swagger URL here to make calls: [http://localhost:8000/api/v1/swagger/schema/](http://localhost:8000/api/v1/swagger/schema/).
+1. Install `git` and clone the git project:  `git clone https://github.com/slim0/mountain-peak.git`
+2. install docker on your workstation and launch it
+3. run `docker compose up` from the root folder of the git project and wait until containers are ready *`-d` option can be add if you want to start the containers as a deamon process.*. Then the web application should run on the port 8000 of your local system.
+4. Visit the swagger URL to try some API calls or just consult the availables API: [http://localhost:8000/api/v1/swagger/schema/](http://localhost:8000/api/v1/swagger/schema/)
 
 N.B.:
 - GET method on /moutain_peaks/ is implementing a filter to retrieve a list of peaks in a given geographical bounding box queryparam.
