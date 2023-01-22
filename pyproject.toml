@@ -23,7 +23,7 @@ djangorestframework-gis = "^1.0"
 
 
 [tool.poetry.group.dev.dependencies]
-flake8 = "^5.0.4"
+flake8 = "^6.0.0"
 black = "^22.10.0"
 isort = "^5.10.1"
 pre-commit = "^2.21.0"
