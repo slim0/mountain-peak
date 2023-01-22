@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 # https://github.com/django/djangoproject.com
-FROM python:3.11.0
+FROM python:3.10.9
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
