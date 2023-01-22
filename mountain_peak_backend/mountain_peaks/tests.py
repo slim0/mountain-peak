@@ -1,4 +1,4 @@
-from django.contrib.gis.geos import Point, Polygon
+from django.contrib.gis.geos import Point
 from django.test import Client, TestCase
 from mountain_peaks.models import MountainPeak
 

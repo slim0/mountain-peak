@@ -9,24 +9,33 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Location',
+            name="Location",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('coordinates', django.contrib.gis.db.models.fields.PointField(geography=True, srid=4326)),
+                ("id", models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name="ID")),
+                ("coordinates", django.contrib.gis.db.models.fields.PointField(geography=True, srid=4326)),
             ],
         ),
         migrations.CreateModel(
-            name='MountainPeak',
+            name="MountainPeak",
             fields=[
-                ('location_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='mountain_peaks.location')),
-                ('name', models.CharField(max_length=255, verbose_name="Mountain's peak name")),
-                ('altitude', models.IntegerField()),
+                (
+                    "location_ptr",
+                    models.OneToOneField(
+                        auto_created=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        parent_link=True,
+                        primary_key=True,
+                        serialize=False,
+                        to="mountain_peaks.location",
+                    ),
+                ),
+                ("name", models.CharField(max_length=255, verbose_name="Mountain's peak name")),
+                ("altitude", models.IntegerField()),
             ],
-            bases=('mountain_peaks.location',),
+            bases=("mountain_peaks.location",),
         ),
     ]
