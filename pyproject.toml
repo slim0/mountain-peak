@@ -26,6 +26,7 @@ djangorestframework-gis = "^1.0"
 flake8 = "^5.0.4"
 black = "^22.10.0"
 isort = "^5.10.1"
+pre-commit = "^2.21.0"
 
 [build-system]
 requires = ["poetry-core"]
@@ -33,6 +34,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.black]
 line-length = 150
+target-version = ["py310"]
 
 [tool.isort]
 profile = "black"
