@@ -1,20 +1,6 @@
 ### Mountain Peak Backend
 
-MFI recrutment process. Simple web service for storing and retrieving moutain peaks.
-
-# Instructions
-
-The context of this test is to provide a simple web service for storing and retrieving moutain peaks.
-
-Using Django / FastAPI / Laravel / Symfony … *  and a postgresql database (postGIS can be used for geo features), implement the following features:
-- models/db tables for storing a peak location and attribute: lat, lon, altitude, name
-- REST api endpoints to :
-  * create/read/update/delete a peak
-  * retrieve a list of peaks in a given geographical bounding box
-
-Deploy all this stack using docker and docker-compose
-
-The source code should be delivered using github/ bitbucket with detailed explanations on how to deploy and launch the project.
+Simple web service for storing and retrieving moutain peaks.
 
 # How to run the app and call the API
 
